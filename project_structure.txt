@@ -12,18 +12,29 @@ liga_activity_3_integ_prog_tools/
 │
 ├── app/
 │   ├── Http/
+│   │   ├── Kernel.php
 │   │   └── Controllers/
+│   │       ├── AuthController.php
 │   │       ├── Controller.php
 │   │       └── StudentController.php
+│   ├── Http/                         (duplicate entry? originally had Middleware under Http)
+│   │   └── Middleware/
+│   │       └── CheckAbility.php
 │   ├── Models/
 │   │   ├── Student.php
-│   │   └── User.php
+│   │   └── User.php                   (modified: added HasRoles trait)
+│   ├── Policies/                       (new directory)
+│   │   └── StudentPolicy.php            (new policy file)
 │   └── Providers/
-│       └── AppServiceProvider.php
+│       └── AppServiceProvider.php       (modified: registered StudentPolicy)
 │
 ├── asset/
 │   └── image/
 │       └── screenshot/
+│           ├── thunderclient-getuser.png
+│           ├── thunderclient-login.png
+│           ├── thunderclient-logout.png
+│           ├── thunderclient-register.png
 │           └── thunderclient-students.png
 │
 ├── bootstrap/
@@ -40,7 +51,9 @@ liga_activity_3_integ_prog_tools/
 │   ├── filesystems.php
 │   ├── logging.php
 │   ├── mail.php
+│   ├── permission.php                   (new config file from Spatie)
 │   ├── queue.php
+│   ├── sanctum.php
 │   ├── services.php
 │   └── session.php
 │
@@ -52,9 +65,12 @@ liga_activity_3_integ_prog_tools/
 │   │   ├── 0001_01_01_000000_create_users_table.php
 │   │   ├── 0001_01_01_000001_create_cache_table.php
 │   │   ├── 0001_01_01_000002_create_jobs_table.php
-│   │   └── 2026_02_11_141506_create_students_table.php
+│   │   ├── 2026_02_11_141506_create_students_table.php
+│   │   ├── 2026_02_18_015020_create_personal_access_tokens_table.php
+│   │   └── 2026_03_05_151744_create_permission_tables.php   (new migration)
 │   └── seeders/
-│       └── DatabaseSeeder.php
+│       ├── DatabaseSeeder.php
+│       └── RolesAndPermissionsSeeder.php                     (new seeder)
 │
 ├── public/
 │   ├── .htaccess

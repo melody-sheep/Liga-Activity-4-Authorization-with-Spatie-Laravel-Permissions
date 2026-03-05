@@ -34,7 +34,6 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        // Named middleware for ability checks
         'ability' => \App\Http\Middleware\CheckAbility::class,
     ];
 }

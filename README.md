@@ -1,45 +1,44 @@
-# 🎓 Laravel API Projects - Activities 1, 2, 3 & 4
 
----
 
 ## 📌 ACTIVITY 4: Authorization with Spatie Laravel Permissions
 
-A role-based authorization system built on top of Activity 3, implementing **Spatie Laravel Permissions** with Policies and Gates to control access to student resources.
+A **Role-Based Access Control (RBAC)** system built on top of Activity 3, using Spatie Laravel Permissions to manage user roles and permissions with Laravel Policies.
 
-### ✨ New Features (Activity 4)
-- ✅ **Role-based access control** (Admin, Editor, No Role)
-- ✅ **Permissions system** (`view students`, `create students`, `edit students`, `delete students`)
-- ✅ **Policy-based authorization** for Student model
-- ✅ **Gate integration** with Laravel's native authorization
-- ✅ **Role assignment** via seeder
-- ✅ **403 Forbidden responses** for unauthorized actions
+### ✨ New Features
+- ✅ Role-based authorization (Admin, Editor)
+- ✅ Permission management via Spatie
+- ✅ Laravel Policies for Student model
+- ✅ Token-based authentication with role checks
+- ✅ Granular access control for CRUD operations
 
-### 🔧 Technologies Added
+### 🔧 Additional Technologies
 | Technology | Purpose |
 |------------|---------|
-| 🔐 Spatie Laravel Permissions v7.2 | Role & Permission Management |
-| 🛡️ Laravel Policies | Model-specific authorization |
-| 🚦 Laravel Gates | Authorization logic |
+| 🔑 Spatie Laravel Permissions | Role & Permission Management |
+| 🛡️ Laravel Policies | Authorization Logic |
+| 👥 Role-Based Access Control | User Role Management |
 
 ---
 
-### 📋 Authorization Matrix
+### 📋 Permission Matrix
 
-| User Role | View Students | Create Student | Edit Student | Delete Student |
-|-----------|--------------|----------------|--------------|----------------|
-| 👑 Admin | ✅ ALLOWED | ✅ ALLOWED | ✅ ALLOWED | ✅ ALLOWED |
-| ✏️ Editor | ✅ ALLOWED | ❌ DENIED | ✅ ALLOWED | ❌ DENIED |
-| 👤 No Role | ❌ DENIED | ❌ DENIED | ❌ DENIED | ❌ DENIED |
+| Role | View Students | Create Students | Edit Students | Delete Students |
+|------|--------------|-----------------|---------------|-----------------|
+| 👑 **Admin** | ✅ | ✅ | ✅ | ✅ |
+| ✏️ **Editor** | ✅ | ❌ | ✅ | ❌ |
+| 👤 **No Role** | ❌ | ❌ | ❌ | ❌ |
 
 ---
 
 ### 🧪 Activity 4 — ThunderClient Testing Screenshots
 
-#### 1. 👑 Admin User Testing (Full Access)
+#### 1. 👑 Admin User Testing
 
-**GET All Students - Admin**
+**GET All Students (Admin)**
+**GET** `http://127.0.0.1:8000/api/students`  
+**Headers:** `Authorization: Bearer {admin_token}`
 <p align="center">
-  <img src="./asset/image/screenshot/activity4/admin-get-students.png" alt="Admin GET Students" width="80%" />
+  <img src="./asset/image/screenshot/act4/admin-get-students.png" alt="Admin GET Students" width="80%" />
 </p>
 <p align="center">
   <em>✅ Admin can view all students (200 OK)</em>
@@ -47,9 +46,11 @@ A role-based authorization system built on top of Activity 3, implementing **Spa
 
 ---
 
-**CREATE Student - Admin**
+**CREATE Student (Admin)**
+**POST** `http://127.0.0.1:8000/api/students`  
+**Headers:** `Authorization: Bearer {admin_token}`
 <p align="center">
-  <img src="./asset/image/screenshot/activity4/admin-create-student.png" alt="Admin Create Student" width="80%" />
+  <img src="./asset/image/screenshot/act4/admin-create-student.png" alt="Admin Create Student" width="80%" />
 </p>
 <p align="center">
   <em>✅ Admin can create new student (201 Created)</em>
@@ -57,9 +58,11 @@ A role-based authorization system built on top of Activity 3, implementing **Spa
 
 ---
 
-**UPDATE Student - Admin**
+**UPDATE Student (Admin)**
+**PUT** `http://127.0.0.1:8000/api/students/1`  
+**Headers:** `Authorization: Bearer {admin_token}`
 <p align="center">
-  <img src="./asset/image/screenshot/activity4/admin-update-student.png" alt="Admin Update Student" width="80%" />
+  <img src="./asset/image/screenshot/act4/admin-update-student.png" alt="Admin Update Student" width="80%" />
 </p>
 <p align="center">
   <em>✅ Admin can update student (200 OK)</em>
@@ -67,9 +70,11 @@ A role-based authorization system built on top of Activity 3, implementing **Spa
 
 ---
 
-**DELETE Student - Admin**
+**DELETE Student (Admin)**
+**DELETE** `http://127.0.0.1:8000/api/students/1`  
+**Headers:** `Authorization: Bearer {admin_token}`
 <p align="center">
-  <img src="./asset/image/screenshot/activity4/admin-delete-student.png" alt="Admin Delete Student" width="80%" />
+  <img src="./asset/image/screenshot/act4/admin-delete-student.png" alt="Admin Delete Student" width="80%" />
 </p>
 <p align="center">
   <em>✅ Admin can delete student (200 OK)</em>
@@ -77,11 +82,13 @@ A role-based authorization system built on top of Activity 3, implementing **Spa
 
 ---
 
-#### 2. ✏️ Editor User Testing (Limited Access)
+#### 2. ✏️ Editor User Testing
 
-**GET All Students - Editor**
+**GET All Students (Editor)**
+**GET** `http://127.0.0.1:8000/api/students`  
+**Headers:** `Authorization: Bearer {editor_token}`
 <p align="center">
-  <img src="./asset/image/screenshot/activity4/editor-get-students.png" alt="Editor GET Students" width="80%" />
+  <img src="./asset/image/screenshot/act4/editor-get-students.png" alt="Editor GET Students" width="80%" />
 </p>
 <p align="center">
   <em>✅ Editor can view all students (200 OK)</em>
@@ -89,19 +96,23 @@ A role-based authorization system built on top of Activity 3, implementing **Spa
 
 ---
 
-**CREATE Student - Editor (FAIL)**
+**CREATE Student (Editor) - FORBIDDEN**
+**POST** `http://127.0.0.1:8000/api/students`  
+**Headers:** `Authorization: Bearer {editor_token}`
 <p align="center">
-  <img src="./asset/image/screenshot/activity4/editor-create-fail.png" alt="Editor Create Fail" width="80%" />
+  <img src="./asset/image/screenshot/act4/editor-create-fail.png" alt="Editor Create Fail" width="80%" />
 </p>
 <p align="center">
-  <em>❌ Editor cannot create student - 403 Forbidden</em>
+  <em>❌ Editor cannot create student (403 Forbidden)</em>
 </p>
 
 ---
 
-**UPDATE Student - Editor**
+**UPDATE Student (Editor)**
+**PUT** `http://127.0.0.1:8000/api/students/1`  
+**Headers:** `Authorization: Bearer {editor_token}`
 <p align="center">
-  <img src="./asset/image/screenshot/activity4/editor-update-student.png" alt="Editor Update Student" width="80%" />
+  <img src="./asset/image/screenshot/act4/editor-update-student.png" alt="Editor Update Student" width="80%" />
 </p>
 <p align="center">
   <em>✅ Editor can update student (200 OK)</em>
@@ -109,189 +120,160 @@ A role-based authorization system built on top of Activity 3, implementing **Spa
 
 ---
 
-**DELETE Student - Editor (FAIL)**
+**DELETE Student (Editor) - FORBIDDEN**
+**DELETE** `http://127.0.0.1:8000/api/students/1`  
+**Headers:** `Authorization: Bearer {editor_token}`
 <p align="center">
-  <img src="./asset/image/screenshot/activity4/editor-delete-fail.png" alt="Editor Delete Fail" width="80%" />
+  <img src="./asset/image/screenshot/act4/editor-delete-fail.png" alt="Editor Delete Fail" width="80%" />
 </p>
 <p align="center">
-  <em>❌ Editor cannot delete student - 403 Forbidden</em>
-</p>
-
----
-
-#### 3. 👤 No Role User Testing (No Access)
-
-**GET All Students - No Role (FAIL)**
-<p align="center">
-  <img src="./asset/image/screenshot/activity4/norole-get-fail.png" alt="No Role GET Fail" width="80%" />
-</p>
-<p align="center">
-  <em>❌ User with no role cannot view students - 403 Forbidden</em>
+  <em>❌ Editor cannot delete student (403 Forbidden)</em>
 </p>
 
 ---
 
-**CREATE Student - No Role (FAIL)**
+#### 3. 👤 No Role User Testing
+
+**GET All Students (No Role) - FORBIDDEN**
+**GET** `http://127.0.0.1:8000/api/students`  
+**Headers:** `Authorization: Bearer {norole_token}`
 <p align="center">
-  <img src="./asset/image/screenshot/activity4/norole-create-fail.png" alt="No Role Create Fail" width="80%" />
+  <img src="./asset/image/screenshot/act4/norole-get-fail.png" alt="No Role GET Fail" width="80%" />
 </p>
 <p align="center">
-  <em>❌ User with no role cannot create student - 403 Forbidden</em>
-</p>
-
----
-
-#### 4. 🗄️ Database Setup Proof
-
-**Permission Tables**
-<p align="center">
-  <img src="./asset/image/screenshot/activity4/database-tables.png" alt="Database Tables" width="80%" />
-</p>
-<p align="center">
-  <em>✅ Spatie permission tables created successfully</em>
+  <em>❌ User with no role cannot view students (403 Forbidden)</em>
 </p>
 
 ---
 
-**Roles & Permissions Seeder**
+**CREATE Student (No Role) - FORBIDDEN**
+**POST** `http://127.0.0.1:8000/api/students`  
+**Headers:** `Authorization: Bearer {norole_token}`
 <p align="center">
-  <img src="./asset/image/screenshot/activity4/seeder-run.png" alt="Seeder Run" width="80%" />
+  <img src="./asset/image/screenshot/act4/norole-create-fail.png" alt="No Role Create Fail" width="80%" />
 </p>
 <p align="center">
-  <em>✅ Roles and permissions seeded successfully</em>
-</p>
-
----
-
-## 📌 ACTIVITY 3: Laravel Sanctum Authentication API
-
-A fully functional **Authentication API** built with Laravel Sanctum featuring token-based authentication with register, login, logout, and protected routes.
-
-### ✨ Features
-- ✅ User registration with name, email, password
-- ✅ User login with token generation
-- ✅ Protected routes using Bearer tokens
-- ✅ Get authenticated user data
-- ✅ Logout (token invalidation)
-- ✅ SQLite database for data persistence
-
-### 🔧 Technologies Used
-| Technology | Purpose |
-|------------|---------|
-| 🧱 Laravel 12 | PHP Framework |
-| 🔐 Laravel Sanctum | Authentication |
-| 🗄️ SQLite | Database |
-| ⚡ ThunderClient | API Testing |
-
----
-
-### 📋 Authentication Endpoints
-
-| Method | Endpoint | Description | Auth Required |
-|--------|----------|-------------|---------------|
-| POST | `/api/register` | Register new user | ❌ No |
-| POST | `/api/login` | Login & get token | ❌ No |
-| GET | `/api/user` | Get authenticated user | ✅ Yes |
-| POST | `/api/logout` | Logout & delete token | ✅ Yes |
-| GET | `/api/students` | Get all students (protected) | ✅ Yes |
-| POST | `/api/students` | Create new student (protected) | ✅ Yes |
-| GET | `/api/students/{id}` | Get single student (protected) | ✅ Yes |
-| PUT | `/api/students/{id}` | Update student (protected) | ✅ Yes |
-| DELETE | `/api/students/{id}` | Delete student (protected) | ✅ Yes |
-
----
-
-### 🧪 Activity 3 — ThunderClient Testing Screenshots
-
-#### 1. 📝 Register Endpoint
-**POST** `http://127.0.0.1:8000/api/register`
-<p align="center">
-  <img src="./asset/image/screenshot/activity3/thunderclient-register.png" alt="Register Endpoint" width="80%" />
-</p>
-<p align="center">
-  <em>✅ User registration with name, email, and password</em>
+  <em>❌ User with no role cannot create student (403 Forbidden)</em>
 </p>
 
 ---
 
-#### 2. 🔑 Login Endpoint
-**POST** `http://127.0.0.1:8000/api/login`
-<p align="center">
-  <img src="./asset/image/screenshot/activity3/thunderclient-login.png" alt="Login Endpoint" width="80%" />
-</p>
-<p align="center">
-  <em>✅ Login returns user data and Bearer token</em>
-</p>
+### 💾 Database Structure (New Tables)
+
+```sql
+-- Roles Table (Spatie)
+CREATE TABLE roles (
+    id INTEGER PRIMARY KEY,
+    name VARCHAR(255),
+    guard_name VARCHAR(255),
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP
+);
+
+-- Permissions Table (Spatie)
+CREATE TABLE permissions (
+    id INTEGER PRIMARY KEY,
+    name VARCHAR(255),
+    guard_name VARCHAR(255),
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP
+);
+
+-- Model Has Roles (Pivot)
+CREATE TABLE model_has_roles (
+    role_id INTEGER,
+    model_type VARCHAR(255),
+    model_id INTEGER,
+    FOREIGN KEY (role_id) REFERENCES roles(id)
+);
+
+-- Role Has Permissions (Pivot)
+CREATE TABLE role_has_permissions (
+    permission_id INTEGER,
+    role_id INTEGER,
+    FOREIGN KEY (permission_id) REFERENCES permissions(id),
+    FOREIGN KEY (role_id) REFERENCES roles(id)
+);
+```
 
 ---
 
-#### 3. 👤 Get User Endpoint (Protected)
-**GET** `http://127.0.0.1:8000/api/user`  
-**Headers:** `Authorization: Bearer {token}`
-<p align="center">
-  <img src="./asset/image/screenshot/activity3/thunderclient-getuser.png" alt="Get User Endpoint" width="80%" />
-</p>
-<p align="center">
-  <em>✅ Get authenticated user data using Bearer token</em>
-</p>
+### 🚀 How to Run Activity 4
+
+```bash
+# 1. Navigate to project
+cd "D:\3rd yr bsit 2nd sem files\Integrative Prog. & Tech\Activities\activity_4\liga_activity_4_integ_prog_tools"
+
+# 2. Install dependencies (includes spatie/laravel-permission)
+composer install
+
+# 3. Setup environment
+copy .env.example .env
+php artisan key:generate
+
+# 4. Configure database in .env (SQLite)
+DB_CONNECTION=sqlite
+# Remove DB_HOST, DB_PORT, DB_DATABASE, DB_USERNAME, DB_PASSWORD
+
+# 5. Run migrations (includes permission tables)
+php artisan migrate
+
+# 6. Seed roles and permissions
+php artisan db:seed --class=RolesAndPermissionsSeeder
+
+# 7. Start server
+php artisan serve
+
+# 8. Test with ThunderClient using endpoints above
+```
 
 ---
 
-#### 4. 🚪 Logout Endpoint
-**POST** `http://127.0.0.1:8000/api/logout`  
-**Headers:** `Authorization: Bearer {token}`
-<p align="center">
-  <img src="./asset/image/screenshot/activity3/thunderclient-logout.png" alt="Logout Endpoint" width="80%" />
-</p>
-<p align="center">
-  <em>✅ Logout invalidates the token</em>
-</p>
+### 📊 Sample Role Assignments
+
+After seeding, your database contains:
+
+**Roles:**
+```json
+[
+  {"id": 1, "name": "admin"},
+  {"id": 2, "name": "editor"}
+]
+```
+
+**Permissions:**
+```json
+[
+  {"id": 1, "name": "view students"},
+  {"id": 2, "name": "create students"},
+  {"id": 3, "name": "edit students"},
+  {"id": 4, "name": "delete students"}
+]
+```
+
+**Admin User (ID: 1):**
+- Has role: `admin`
+- Has all permissions via role
+
+**Editor User (ID: 2):**
+- Has role: `editor`
+- Has permissions: `view students`, `edit students`
 
 ---
 
-## 📌 ACTIVITY 2: Student CRUD API (Legacy)
+## 📁 Folder Structure for Activity 4 Screenshots
 
-A fully functional **RESTful API** built with Laravel that performs CRUD operations on student records featuring biblical names.
-
-### 📋 API Endpoints (Activity 2)
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| ✅ GET | `/api/test` | Test API connection |
-| ✅ POST | `/api/students` | Create new student |
-| ✅ GET | `/api/students` | Get all students |
-| ✅ GET | `/api/students/{id}` | Get single student |
-| ✅ PUT | `/api/students/{id}` | Update student |
-| ✅ DELETE | `/api/students/{id}` | Delete student |
-
-### 🧪 Activity 2 — ThunderClient Testing Screenshot
-
-**GET All Students**
-<p align="center">
-  <img src="./asset/image/screenshot/activity2/thunderclient-students.png" alt="Student CRUD" width="80%" />
-</p>
-<p align="center">
-  <em>✅ GET /api/students - Successfully retrieved all student records</em>
-</p>
-
----
-
-## 📌 ACTIVITY 1: Basic Laravel Setup (Not Included)
-
----
-
-## 👨‍💻 Author
-
-**Alther Liga**  
-📧 Email: altherliga@gmail.com  
-📁 Repository: [Liga-Activity-4-Authorization-with-Spatie-Laravel-Permissions](https://github.com/melody-sheep/Liga-Activity-4-Authorization-with-Spatie-Laravel-Permissions.git)
-
----
-
-## 📅 Completion Date
-**March 5, 2026**
-
----
-
-## 📝 License
-This project is licensed under the MIT License.
+Create a new folder for Activity 4 screenshots:
+```
+asset/image/screenshot/act4/
+├── admin-get-students.png
+├── admin-create-student.png
+├── admin-update-student.png
+├── admin-delete-student.png
+├── editor-get-students.png
+├── editor-create-fail.png
+├── editor-update-student.png
+├── editor-delete-fail.png
+├── norole-get-fail.png
+└── norole-create-fail.png
+```

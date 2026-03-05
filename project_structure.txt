@@ -1,4 +1,4 @@
-liga_activity_3_integ_prog_tools/
+liga_activity_4_integ_prog_tools/
 ├── .editorconfig
 ├── .gitattributes
 ├── .gitignore
@@ -13,29 +13,43 @@ liga_activity_3_integ_prog_tools/
 ├── app/
 │   ├── Http/
 │   │   ├── Kernel.php
-│   │   └── Controllers/
-│   │       ├── AuthController.php
-│   │       ├── Controller.php
-│   │       └── StudentController.php
-│   ├── Http/                         (duplicate entry? originally had Middleware under Http)
+│   │   ├── Controllers/
+│   │   │   ├── AuthController.php
+│   │   │   ├── Controller.php
+│   │   │   └── StudentController.php
 │   │   └── Middleware/
 │   │       └── CheckAbility.php
 │   ├── Models/
 │   │   ├── Student.php
-│   │   └── User.php                   (modified: added HasRoles trait)
-│   ├── Policies/                       (new directory)
-│   │   └── StudentPolicy.php            (new policy file)
+│   │   └── User.php
+│   ├── Policies/
+│   │   └── StudentPolicy.php
 │   └── Providers/
-│       └── AppServiceProvider.php       (modified: registered StudentPolicy)
+│       └── AppServiceProvider.php
 │
 ├── asset/
 │   └── image/
 │       └── screenshot/
-│           ├── thunderclient-getuser.png
-│           ├── thunderclient-login.png
-│           ├── thunderclient-logout.png
-│           ├── thunderclient-register.png
-│           └── thunderclient-students.png
+│           ├── activity2/
+│           │   └── thunderclient-students.png
+│           ├── activity3/
+│           │   ├── thunderclient-getuser.png
+│           │   ├── thunderclient-login.png
+│           │   ├── thunderclient-logout.png
+│           │   └── thunderclient-register.png
+│           └── activity4/
+│               ├── admin-create-student.png
+│               ├── admin-delete-student.png
+│               ├── admin-get-students.png
+│               ├── admin-update-student.png
+│               ├── database-tables.png
+│               ├── editor-create-fail.png
+│               ├── editor-delete-fail.png
+│               ├── editor-get-students.png
+│               ├── editor-update-student.png
+│               ├── norole-create-fail.png
+│               ├── norole-get-fail.png
+│               └── seeder-run.png
 │
 ├── bootstrap/
 │   ├── app.php
@@ -51,7 +65,7 @@ liga_activity_3_integ_prog_tools/
 │   ├── filesystems.php
 │   ├── logging.php
 │   ├── mail.php
-│   ├── permission.php                   (new config file from Spatie)
+│   ├── permission.php
 │   ├── queue.php
 │   ├── sanctum.php
 │   ├── services.php
@@ -67,10 +81,10 @@ liga_activity_3_integ_prog_tools/
 │   │   ├── 0001_01_01_000002_create_jobs_table.php
 │   │   ├── 2026_02_11_141506_create_students_table.php
 │   │   ├── 2026_02_18_015020_create_personal_access_tokens_table.php
-│   │   └── 2026_03_05_151744_create_permission_tables.php   (new migration)
+│   │   └── 2026_03_05_151744_create_permission_tables.php
 │   └── seeders/
 │       ├── DatabaseSeeder.php
-│       └── RolesAndPermissionsSeeder.php                     (new seeder)
+│       └── RolesAndPermissionsSeeder.php
 │
 ├── public/
 │   ├── .htaccess
